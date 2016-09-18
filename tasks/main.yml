@@ -1,2 +1,14 @@
+# ansible-role-ubiquiti-unifi/tasks.main.yml
 ---
-# tasks file for ansible-role-ubiquiti-unifi
+- name: "Ubiquiti Unifi | Ensure Unifi apt source"
+  apt_repository: repo="deb http://www.ubnt.com/downloads/unifi/debian stable ubiquiti" state=present
+
+- name: "Ubiquiti Unifi | Ensure apt key"
+  apt_key: keyserver=keyserver.ubuntu.com id="C0A52C50"
+
+- name: "Ubiquiti Unifi | Ensure unifi package"
+  apt: pkg=unifi state=present update_cache=yes
+
+- name: "Ubiquiti Unifi | Ensure unifi service started"
+  service: name=unifi state=started
+...
